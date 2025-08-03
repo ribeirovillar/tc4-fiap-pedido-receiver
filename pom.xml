@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.fiap</groupId>
-	<artifactId>pedido-receiver</artifactId>
+	<artifactId>fiap-pedido-receiver</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>tc4-fiap-pedido-receiver</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Serviço REST para encaminhar requisições de pedido usando Spring e RabbitMQ</description>
 	<url/>
 	<licenses>
 		<license/>

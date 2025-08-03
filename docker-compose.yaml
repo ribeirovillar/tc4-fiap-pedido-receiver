@@ -2,7 +2,7 @@ services:
 
   rabbitmq:
     image: rabbitmq:3.13.7-management-alpine
-    container_name: fiap-pedido-rabbitmq
+    container_name: rabbitmq
     hostname: rabbitmq
     ports:
       - "15672:15672"
@@ -10,17 +10,18 @@ services:
     environment:
       RABBITMQ_DEFAULT_USER: guest
       RABBITMQ_DEFAULT_PASS: guest
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
     healthcheck:
       test: rabbitmq-diagnostics -q ping
-      interval: 10s
-      timeout: 10s
-      retries: 10
-      start_period: 30s
+      interval: 30s
+      timeout: 30s
+      retries: 3
     networks:
       - pedido-network
 
   fiap-pedido-receiver:
-    build: .
+    image: draraujoo/fiap-pedido-receiver:latest
     container_name: fiap-pedido-receiver
     depends_on:
       rabbitmq:
@@ -41,4 +42,8 @@ services:
 
 networks:
   pedido-network:
+    name: pedido-network
     driver: bridge
+
+volumes:
+    rabbitmq_data:
